@@ -8,7 +8,10 @@
 import Foundation
 import AVFoundation
 
-class Audiobox: NSObject, ObservableObject {
+class AudioBox: NSObject, ObservableObject {
+    
+    @Published var status: AudioStatus = .stopped
+    
     var audioRecorder: AVAudioRecorder?
     var audioPlayer: AVAudioPlayer?
     
@@ -38,13 +41,17 @@ class Audiobox: NSObject, ObservableObject {
     
     func record() {
         audioRecorder?.record()
+        status = .recording
     }
     
     func stop() {
         audioRecorder?.stop()
+        status = .stopped
     }
 }
 
-extension Audiobox: AVAudioRecorderDelegate {
-    
+extension AudioBox: AVAudioRecorderDelegate {
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        status = .stopped
+    }
 }

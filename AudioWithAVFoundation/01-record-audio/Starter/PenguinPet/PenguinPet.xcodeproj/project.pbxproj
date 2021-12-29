@@ -11,7 +11,8 @@
 		D3F3E1EE261E22BC008E7795 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F3E1ED261E22BC008E7795 /* ContentView.swift */; };
 		D3F3E1F0261E22BE008E7795 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F3E1EF261E22BE008E7795 /* Assets.xcassets */; };
 		D3F3E1F3261E22BE008E7795 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3F3E1F2261E22BE008E7795 /* Preview Assets.xcassets */; };
-		D7DFC4D9277B959A000E271D /* Audiobox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DFC4D8277B959A000E271D /* Audiobox.swift */; };
+		D7DFC4D9277B959A000E271D /* AudioBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DFC4D8277B959A000E271D /* AudioBox.swift */; };
+		D7DFC4DB277B987C000E271D /* AudioStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DFC4DA277B987C000E271D /* AudioStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +22,8 @@
 		D3F3E1EF261E22BE008E7795 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3F3E1F2261E22BE008E7795 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D3F3E1F4261E22BE008E7795 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D7DFC4D8277B959A000E271D /* Audiobox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audiobox.swift; sourceTree = "<group>"; };
+		D7DFC4D8277B959A000E271D /* AudioBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBox.swift; sourceTree = "<group>"; };
+		D7DFC4DA277B987C000E271D /* AudioStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +56,13 @@
 		D3F3E1EA261E22BC008E7795 /* PenguinPet */ = {
 			isa = PBXGroup;
 			children = (
-				D3F3E1EB261E22BC008E7795 /* PenguinPetApp.swift */,
+				D7DFC4DA277B987C000E271D /* AudioStatus.swift */,
+				D7DFC4D8277B959A000E271D /* AudioBox.swift */,
 				D3F3E1ED261E22BC008E7795 /* ContentView.swift */,
+				D3F3E1EB261E22BC008E7795 /* PenguinPetApp.swift */,
 				D3F3E1EF261E22BE008E7795 /* Assets.xcassets */,
 				D3F3E1F4261E22BE008E7795 /* Info.plist */,
 				D3F3E1F1261E22BE008E7795 /* Preview Content */,
-				D7DFC4D8277B959A000E271D /* Audiobox.swift */,
 			);
 			path = PenguinPet;
 			sourceTree = "<group>";
@@ -143,7 +146,8 @@
 			files = (
 				D3F3E1EE261E22BC008E7795 /* ContentView.swift in Sources */,
 				D3F3E1EC261E22BC008E7795 /* PenguinPetApp.swift in Sources */,
-				D7DFC4D9277B959A000E271D /* Audiobox.swift in Sources */,
+				D7DFC4DB277B987C000E271D /* AudioStatus.swift in Sources */,
+				D7DFC4D9277B959A000E271D /* AudioBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +277,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PenguinPet/Preview Content\"";
-				DEVELOPMENT_TEAM = QDKA3FBC46;
+				DEVELOPMENT_TEAM = HSD25A6VPH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PenguinPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -281,7 +285,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.PenguinPet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sungwon.PenguinPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -295,7 +299,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PenguinPet/Preview Content\"";
-				DEVELOPMENT_TEAM = QDKA3FBC46;
+				DEVELOPMENT_TEAM = HSD25A6VPH;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = PenguinPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -303,7 +307,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.razeware.PenguinPet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sungwon.PenguinPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
