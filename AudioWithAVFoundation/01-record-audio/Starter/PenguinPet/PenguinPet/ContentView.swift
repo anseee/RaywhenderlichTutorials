@@ -73,9 +73,10 @@ struct ContentView: View {
                                             Image(audioBox.status == .recording ? "button-record-active" : "button-record-inactive")
                                         }
                                         Button {
-                                            // play audio
+                                            audioBox.play()
                                         } label: {
-                                            Image( "button-play-inactive")
+                                            Image(audioBox.status == .playing ? "button-play-active" :
+                                                "button-play-inactive")
                                         }
                                     }
                                     .padding([.leading, .trailing])

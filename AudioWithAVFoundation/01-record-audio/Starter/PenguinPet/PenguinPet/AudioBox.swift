@@ -7,6 +7,7 @@
 
 import Foundation
 import AVFoundation
+import SwiftUI
 
 class AudioBox: NSObject, ObservableObject {
     
@@ -48,10 +49,36 @@ class AudioBox: NSObject, ObservableObject {
         audioRecorder?.stop()
         status = .stopped
     }
+    
+    func play() {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: urlForMemo)
+            audioPlayer?.delegate = self
+        }
+        catch {
+            print("error play audio")
+        }
+        
+        if let duration = audioPlayer?.duration, duration > 0 {
+            audioPlayer?.play()
+            status = .playing
+        }
+    }
+    
+    func stopPlayback() {
+        audioPlayer?.stop()
+        status = .stopped
+    }
 }
 
 extension AudioBox: AVAudioRecorderDelegate {
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        status = .stopped
+    }
+}
+
+extension AudioBox: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         status = .stopped
     }
 }
