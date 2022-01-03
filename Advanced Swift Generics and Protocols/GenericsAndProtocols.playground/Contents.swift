@@ -33,7 +33,11 @@ var stack: Stack = [1,2,3]
 stack.push(1)
 stack.pop()
 
+func add<T>(_ a:T, _ b: T) -> T {
+    return a + b
+}
 
+print(add(1, 2))
 
 
 
