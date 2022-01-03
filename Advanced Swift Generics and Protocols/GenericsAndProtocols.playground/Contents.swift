@@ -33,7 +33,7 @@ var stack: Stack = [1,2,3]
 stack.push(1)
 stack.pop()
 
-func add<T>(_ a:T, _ b: T) -> T {
+@inlinable func add<T: Numeric>(_ a:T, _ b: T) -> T {
     return a + b
 }
 
