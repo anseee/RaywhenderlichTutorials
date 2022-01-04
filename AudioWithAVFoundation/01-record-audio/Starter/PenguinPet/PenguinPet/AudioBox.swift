@@ -23,6 +23,46 @@ class AudioBox: NSObject, ObservableObject {
         return tempDir.appendingPathComponent(filePath)
     }
     
+    override init() {
+        super.init()
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(handleRouteChange), name: AVAudioSession.routeChangeNotification, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc
+    func handleRouteChange(_ notification: Notification) {
+        guard let info = notification.userInfo,
+              let rawValue = info[AVAudioSessionRouteChangeReasonKey] as? UInt else {
+                  return
+              }
+        let reason = AVAudioSession.RouteChangeReason(rawValue: rawValue)
+        
+        if reason == .oldDeviceUnavailable {
+            guard let previousRoute = info[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription,
+                  let previousOutput = previousRoute.outputs.first else {
+                      return
+                  }
+            
+            if previousOutput.portType == .headphones {
+                if status == .playing {
+                    stopPlayback()
+                }
+                else if status == .recording {
+                    stopRecording()
+                }
+            }
+        }
+    }
+
+    func stopRecording() {
+        
+    }
+    
     func setupRecorder() {
         let recordSettings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatLinearPCM),
