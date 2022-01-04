@@ -34,51 +34,81 @@ import SwiftUI
 import AVFoundation
 
 struct ContentView: View {
-
-  var body: some View {
-    NavigationView {
-      GeometryReader { geometry in
-        ZStack {
-          Image("bg")
-            .resizable()
-            .edgesIgnoringSafeArea(.all)
-          VStack {
-            Image("penguin_01")
-              .padding(.top, geometry.size.height * 0.1)
-            ZStack {
-              Image("Overlay")
-                .resizable()
-                .edgesIgnoringSafeArea(.bottom)
-              VStack {
-                Text("00:00:00")
-                  .font(Font.custom("Menlo Bold", size: 24.0))
-                .foregroundColor(Color(red: 0.1, green: 0.28, blue: 0.52))
-                  .padding(.top)
-                Spacer()
-                VStack {
-                  HStack {
-                    Button {
-                      // record audio
-                    } label: {
-                      Image("button-record-inactive")
+    
+    @ObservedObject var audioBox = AudioBox()
+    @State var hasMicAccess = false
+    @State var displayNotification = false
+    
+    var body: some View {
+        NavigationView {
+            GeometryReader { geometry in
+                ZStack {
+                    Image("bg")
+                        .resizable()
+                        .edgesIgnoringSafeArea(.all)
+                    VStack {
+                        Image("penguin_01")
+                            .padding(.top, geometry.size.height * 0.1)
+                        ZStack {
+                            Image("Overlay")
+                                .resizable()
+                                .edgesIgnoringSafeArea(.bottom)
+                            VStack {
+                                Text("00:00:00")
+                                    .font(Font.custom("Menlo Bold", size: 24.0))
+                                    .foregroundColor(Color(red: 0.1, green: 0.28, blue: 0.52))
+                                    .padding(.top)
+                                Spacer()
+                                VStack {
+                                    HStack {
+                                        Button {
+                                            if audioBox.status == .stopped {
+                                                hasMicAccess ?
+                                                audioBox.record() :
+                                                requestMicrophoneAccess()
+                                            } else {
+                                                audioBox.stop()
+                                            }
+                                        } label: {
+                                            Image(audioBox.status == .recording ? "button-record-active" : "button-record-inactive")
+                                        }
+                                        Button {
+                                            audioBox.play()
+                                        } label: {
+                                            Image(audioBox.status == .playing ? "button-play-active" :
+                                                "button-play-inactive")
+                                        }
+                                    }
+                                    .padding([.leading, .trailing])
+                                }
+                                .padding(.top, 50)
+                                Spacer()
+                            }
+                        }
                     }
-                    Button {
-                      // play audio
-                    } label: {
-                      Image( "button-play-inactive")
-                    }
-                  }
-                  .padding([.leading, .trailing])
                 }
-                .padding(.top, 50)
-                Spacer()
-              }
-            }
-          }
+                .onAppear {
+                    audioBox.setupRecorder()
+                }
+                .alert(isPresented: $displayNotification) {
+                    Alert(title: Text("마이크 접근 권한이 필요합니다."), message: Text("설정 > 팽귄펫 > 마이크 접근 권한 on"), dismissButton: .default(Text("OK")))
+                }
+            }.navigationBarHidden(true)
         }
-      }.navigationBarHidden(true)
     }
-  }
+    
+    private func requestMicrophoneAccess() {
+        let session = AVAudioSession.sharedInstance()
+        session.requestRecordPermission { granted in
+            hasMicAccess = granted
+            if granted {
+                audioBox.record()
+            }
+            else {
+                displayNotification = true
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
