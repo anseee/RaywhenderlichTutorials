@@ -31,7 +31,7 @@
 /// THE SOFTWARE.
 
 import XCTest
-import FitNess
+@testable import FitNess
 
 class AppModelTests: XCTestCase {
   var sut: AppModel!
@@ -71,6 +71,4 @@ class AppModelTests: XCTestCase {
     let observedState = sut.appState
     XCTAssertEqual(observedState, .inProgress)
   }
-
-  
 }

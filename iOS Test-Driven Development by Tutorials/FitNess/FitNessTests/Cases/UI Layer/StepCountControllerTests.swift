@@ -39,6 +39,7 @@ class StepCountControllerTests: XCTestCase {
   override func setUpWithError() throws {
     try super.setUpWithError()
     sut = StepCountController()
+    sut.startStopPause(nil)
   }
 
   override func tearDownWithError() throws {
@@ -62,18 +63,12 @@ class StepCountControllerTests: XCTestCase {
   // MARK: - In Progress
   
   func testController_whenStartTapped_appIsInProgress() {
-    // when
-    sut.startStopPause(nil)
-
     // then
     let state = AppModel.instance.appState
     XCTAssertEqual(state, AppState.inProgress)
   }
   
   func testController_whenStartTapped_buttonLabelIsPause() {
-    // when
-    sut.startStopPause(nil)
-
     // then
     let text = sut.startButton.title(for: .normal)
     XCTAssertEqual(text, AppState.inProgress.nextStateButtonLabel)
